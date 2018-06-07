@@ -1,21 +1,21 @@
 import 'dart:async';
 
-export 'camera_position.dart';
-export 'location.dart';
-export 'marker.dart';
-export 'static_map_provider.dart';
-export 'toolbar_action.dart';
-export 'map_view_type.dart';
-export 'camera_position.dart';
-export 'map_options.dart';
-export 'locations.dart';
-
 import 'package:flutter/services.dart';
 import 'package:map_view/camera_position.dart';
 import 'package:map_view/location.dart';
 import 'package:map_view/map_options.dart';
 import 'package:map_view/marker.dart';
 import 'package:map_view/toolbar_action.dart';
+
+export 'camera_position.dart';
+export 'camera_position.dart';
+export 'location.dart';
+export 'locations.dart';
+export 'map_options.dart';
+export 'map_view_type.dart';
+export 'marker.dart';
+export 'static_map_provider.dart';
+export 'toolbar_action.dart';
 
 class MapView {
   MethodChannel _channel = const MethodChannel("com.apptreesoftware.map_view");
@@ -102,6 +102,11 @@ class MapView {
   void setCameraPosition(double latitude, double longitude, double zoom) {
     _channel.invokeMethod("setCamera",
         {"latitude": latitude, "longitude": longitude, "zoom": zoom});
+  }
+
+  Future<bool> showDialog(String text) async {
+    bool value = await _channel.invokeMethod("showDialog", {"text": text});
+    return value;
   }
 
   Future<Location> get centerLocation async {

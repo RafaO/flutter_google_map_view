@@ -13,6 +13,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import com.google.android.gms.maps.GoogleMap
+import android.app.AlertDialog
+import android.os.Build
 
 
 class MapViewPlugin(val activity: Activity) : MethodCallHandler {
@@ -158,6 +160,9 @@ class MapViewPlugin(val activity: Activity) : MethodCallHandler {
             call.method == "removeAnnotation" -> {
                 handleRemoveAnnotation(call.arguments as Map<String, Any>)
             }
+            call.method == "showDialog" -> {
+                handleShowDialog(call.arguments as Map<String, Any>, result)
+            }
             else -> result.notImplemented()
         }
     }
@@ -197,5 +202,24 @@ class MapViewPlugin(val activity: Activity) : MethodCallHandler {
             mapActivity?.removeMarker(it)
         }
     }
-}
 
+    fun handleShowDialog(map: Map<String, Any>, result: Result) {
+        val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AlertDialog.Builder(mapActivity, android.R.style.Theme_Material_Dialog_Alert)
+        } else {
+            AlertDialog.Builder(mapActivity)
+        }
+        builder.setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes) { dialog, which ->
+                    // continue with delete
+                    result.success(true)
+                }
+                .setNegativeButton(android.R.string.no) { dialog, which ->
+                    // do nothing
+                    result.success(false)
+                }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
+    }
+}
