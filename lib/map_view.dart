@@ -104,8 +104,14 @@ class MapView {
         {"latitude": latitude, "longitude": longitude, "zoom": zoom});
   }
 
-  Future<bool> showDialog(String text) async {
-    bool value = await _channel.invokeMethod("showDialog", {"text": text});
+  Future<bool> showDialog(String title, String message, String positiveButton,
+      String negativeButton) async {
+    bool value = await _channel.invokeMethod("showDialog", {
+      "title": title,
+      "message": message,
+      "positiveButton": positiveButton,
+      "negativeButton": negativeButton
+    });
     return value;
   }
 
