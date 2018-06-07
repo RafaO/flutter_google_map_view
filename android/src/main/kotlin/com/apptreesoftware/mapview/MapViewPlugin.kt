@@ -51,6 +51,10 @@ class MapViewPlugin(val activity: Activity) : MethodCallHandler {
             channel.invokeMethod("onMapReady", null)
         }
 
+        fun onBackButtonClicked() {
+            channel.invokeMethod("onBackButtonClicked", null)
+        }
+
         fun getToolbarActions(actionsList: List<Map<String, Any>>?): List<ToolbarAction> {
             if (actionsList == null) return emptyList()
             val actions = ArrayList<ToolbarAction>()

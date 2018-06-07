@@ -9,11 +9,10 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import android.view.KeyEvent
+import com.google.android.gms.maps.*
+
 
 class MapActivity : AppCompatActivity(),
     OnMapReadyCallback {
@@ -81,6 +80,13 @@ class MapActivity : AppCompatActivity(),
     return super.onCreateOptionsMenu(menu)
   }
 
+  override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+    return if (keyCode == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
+      MapViewPlugin.onBackButtonClicked()
+      true
+    } else super.onKeyDown(keyCode, event)
+
+  }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
       MapViewPlugin.handleToolbarAction(item.itemId)
