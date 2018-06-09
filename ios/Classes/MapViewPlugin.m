@@ -43,6 +43,9 @@
                                                            cameraPosition:[self cameraPositionFromDict:cameraDict]];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
         navController.navigationBar.translucent = NO;
+        navController.navigationBar.barTintColor = [UIColor colorWithRed:0.18 green:0.49 blue:0.20 alpha:1.0];
+        navController.navigationBar.tintColor = [UIColor whiteColor];
+        [navController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor]];
         [self.host presentViewController:navController animated:true completion:nil];
         self.mapViewController = vc;
         [self.mapViewController setLocationEnabled:[mapOptions[@"showUserLocation"] boolValue]];

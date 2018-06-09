@@ -3,6 +3,7 @@ package com.apptreesoftware.mapview
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -12,7 +13,6 @@ import android.view.MenuItem
 import com.google.android.gms.maps.model.*
 import android.view.KeyEvent
 import com.google.android.gms.maps.*
-
 
 class MapActivity : AppCompatActivity(),
     OnMapReadyCallback {
@@ -24,6 +24,7 @@ class MapActivity : AppCompatActivity(),
     super.onCreate(savedInstanceState)
     setContentView(R.layout.map_fragment)
     title = MapViewPlugin.mapTitle
+    getSupportActionBar()?.setBackgroundDrawable(ColorDrawable(0xFF2E7D32.toInt()))
     val mapFragment = supportFragmentManager.findFragmentById(
         R.id.map) as SupportMapFragment
     mapFragment.getMapAsync(this)
