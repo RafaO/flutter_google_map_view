@@ -73,6 +73,12 @@
         result(@{@"latitude": @(location.latitude), @"longitude": @(location.longitude)});
     } else if ([@"getZoomLevel" isEqualToString:call.method]) {
         result(@(self.mapViewController.zoomLevel));
+    } else if ([@"onBackButtonClicked" isEqualToString:call.method]) {
+        [self handleOnBackButtonClicked:call.arguments];
+        result(@YES);
+    } else if ([@"showDialog" isEqualToString:call.method]) {
+        [self handleShowDialog:call.arguments];
+        result(@YES);
     } else if ([@"getVisibleMarkers" isEqualToString:call.method]) {
         result(self.mapViewController.visibleMarkers);
     } else if ([@"dismiss" isEqualToString:call.method]) {
@@ -126,6 +132,12 @@
     if (annotation) {
         [self.mapViewController removeAnnotation:annotation];
     }
+}
+
+- (void)handleOnBackButtonClicked:(NSDictionary *)dict {
+}
+
+- (void)handleShowDialog:(NSDictionary *)dict {
 }
 
 - (void)handleZoomToAnnotations:(NSDictionary *)zoomToDict {
