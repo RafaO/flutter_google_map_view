@@ -210,4 +210,8 @@
     }
     return mapType;
 }
+
+- (void)onBackButtonClicked {
+    [self.channel invokeMethod:@"onBackButtonClicked" arguments:nil];
+}
 @end

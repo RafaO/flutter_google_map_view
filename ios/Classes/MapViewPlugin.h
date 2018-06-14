@@ -18,4 +18,5 @@
 - (void)mapTapped:(CLLocationCoordinate2D)coordinate;
 - (void)cameraPositionChanged:(GMSCameraPosition *)position;
 - (int)getMapViewType:(NSString *)mapViewTypeName;
+- (void)onBackButtonClicked;
 @end
