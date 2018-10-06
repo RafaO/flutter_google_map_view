@@ -88,6 +88,8 @@
         [self.mapViewController shutdown];
         self.mapViewController = nil;
         result(@YES);
+    } else if ([@"showDialog" isEqualToString:call.method]) {
+        result(@YES);
     } else {
         result(FlutterMethodNotImplemented);
     }
